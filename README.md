@@ -80,6 +80,18 @@ lab7_php_ci/
 - Proteksi halaman admin
 - Fitur Logout
 
+### Praktikum 5 – Pagination dan Pencarian
+- Pagination: batasi tampilan pakai paginate(10), tampilkan navigasi pakai $pager->links()
+- Pencarian: form GET dengan ->like('judul', $q), dan $pager->only(['q']) agar kata kunci tidak hilang saat ganti halaman
+
+### Praktikum 6 – Upload File Gambar
+- Tambahkan enctype="multipart/form-data" di form dan <input type="file">
+- Di controller pakai getFile('gambar')->move(ROOTPATH . 'public/gambar'), nama file disimpan ke database
+
+### Praktikum 7 – Relasi Tabel & Query Builder
+- Buat tabel kategori, tambahkan kolom id_kategori sebagai foreign key di tabel artikel
+- Buat KategoriModel, tambahkan method JOIN di ArtikelModel, update controller & view untuk filter kategori + dropdown pilih kategori saat tambah/edit artikel
+
 
 ### Screenshot
 <img width="1366" height="728" alt="Image" src="https://github.com/user-attachments/assets/150c1b3c-b174-4013-9478-9a70c207fe55" />
