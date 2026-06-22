@@ -24,13 +24,17 @@ lab7_php_ci/
 │   │   └── ArtikelTerkini.php
 │   ├── Config/
 │   │   ├── Filters.php
-│   │   └── Routes.php
+│   │   └── Routes.php           
 │   ├── Controllers/
+│   │   ├── Api/                
+│   │   │   ├── Auth.php        
+│   │   │   └── Post.php
 │   │   ├── Artikel.php
 │   │   ├── Page.php
 │   │   └── User.php
 │   ├── Filters/
-│   │   └── Auth.php
+│   │   ├── Auth.php
+│   │   └── ApiAuthFilter.php
 │   ├── Models/
 │   │   ├── ArtikelModel.php
 │   │   └── UserModel.php
@@ -54,6 +58,13 @@ lab7_php_ci/
 │   │   │   └── login.php
 │   │   └── home.php
 │   └── (folder lain bawaan CI4: Database, Helpers, dll)
+├── public/
+│   └── index.php
+├── writable/
+├── vendor/                    
+├── spark
+├── .env
+└── composer.json
 └──
 ```
 
@@ -91,6 +102,56 @@ lab7_php_ci/
 ### Praktikum 7 – Relasi Tabel & Query Builder
 - Buat tabel kategori, tambahkan kolom id_kategori sebagai foreign key di tabel artikel
 - Buat KategoriModel, tambahkan method JOIN di ArtikelModel, update controller & view untuk filter kategori + dropdown pilih kategori saat tambah/edit artikel
+
+### Praktikum 8: AJAX dengan jQuery
+- Implementasi AJAX CRUD menggunakan jQuery
+- Fungsi loadData(), addData(), editData(), deleteData()
+- Dynamic table tanpa reload halaman
+- JSON response dari Controller
+
+### Praktikum 9: AJAX Pagination & Search
+- Kombinasi Pagination + Pencarian dengan AJAX
+- Search form real-time
+- Pagination links dengan AJAX
+- Filter data tanpa me-refresh halaman
+
+### Praktikum 10: RESTful API
+- Membuat Resource Controller (Post.php)
+- Full CRUD menggunakan HTTP Method (GET, POST, PUT, DELETE)
+- JSON Response dengan ResponseTrait
+- Testing API menggunakan Postman
+
+### Praktikum 11: VueJS 3 (Frontend)
+- Frontend SPA dengan VueJS 3 (CDN)
+- Integrasi dengan REST API Backend
+- CRUD menggunakan Axios
+- Modal form, reactive data, dan event handling
+
+### Praktikum 12: VueJS Komponen dan Routing (Single Page Application)
+- Pembuatan Komponen Modular (Home.js, Artikel.js)
+- Implementasi Vue Router menggunakan CDN (vue-router@4)
+- Client-Side Routing dengan createWebHashHistory()
+- Navigasi Dinamis menggunakan <router-link> dan <router-view>
+- Struktur Folder yang lebih modular (assets/js/components/)
+- CSS Enhancement untuk tampilan navigasi dan halaman
+
+
+### Praktikum 13: VueJS Autentikasi dan Navigation Guards (SPA Security)
+- Client-Side Security menggunakan router.beforeEach()
+- Membuat Komponen Login (Login.js)
+- Integrasi API Login dari Backend CodeIgniter 4
+- Proteksi Rute dengan meta: { requiresAuth: true }
+- Dynamic Navigation (Login / Logout otomatis)
+- Penyimpanan Status Login menggunakan localStorage
+
+
+### Praktikum 14: Keamanan API, Autentikasi Token, dan Axios Interceptors
+- Server-Side Security menggunakan Filter di CodeIgniter 4 (ApiAuthFilter)
+- Token-Based Authentication (Authorization: Bearer <token>)
+- Axios Interceptors (Request & Response) untuk menyuntikkan token secara otomatis
+- Proteksi Endpoint API (POST, PUT, DELETE)
+- Pengujian Keamanan menggunakan Postman (tanpa token → 401 Unauthorized)
+- Integrasi penuh antara Frontend VueJS dan Backend CI4
 
 
 ### Screenshot
