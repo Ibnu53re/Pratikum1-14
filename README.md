@@ -23,6 +23,51 @@ Modul ini membangun sistem **Login** menggunakan **CodeIgniter 4** lengkap denga
 
 ---
 
+
+## 🚀 Cara Instalasi
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/<username>/<nama-repo>.git
+cd <nama-repo>
+```
+
+### 2. Konfigurasi Environment
+```bash
+# Salin file env
+cp env .env
+
+# Aktifkan mode development
+# Edit .env, ubah:
+CI_ENVIRONMENT = development
+```
+
+### 3. Konfigurasi Database
+Edit file `.env`:
+```
+database.default.hostname = localhost
+database.default.database = lab_ci4
+database.default.username = root
+database.default.password =
+database.default.DBDriver = MySQLi
+```
+
+### 4. Buat Database & Jalankan Migrasi
+```sql
+CREATE DATABASE lab_ci4;
+```
+```bash
+php spark db:seed UserSeeder
+```
+
+### 5. Jalankan Server
+```bash
+php spark serve
+```
+Buka browser: `http://localhost:8080`
+
+---
+
 ## Struktur Folder Project
 
 ```
@@ -85,12 +130,12 @@ lab7_php_ci/
 
 ```
 lab8_vuejs/
-├── index.html                   # Master layout dengan router
+├── index.html                   
 ├── assets/
 │   ├── css/
-│   │   └── style.css            # Diperbarui dengan style login & nav
+│   │   └── style.css            
 │   └── js/
-│       ├── app.js               # Utama (Router + Interceptors + Guards)
+│       ├── app.js               
 │       └── components/
 │           ├── Home.js
 │           ├── Artikel.js
@@ -107,6 +152,19 @@ lab8_vuejs/
 - Template partial (`header.php` & `footer.php`)
 
 ### Praktikum 2: Framework Lanjutan (CRUD)
+
+**Skema Database:**
+```sql
+CREATE TABLE artikel (
+    id      INT(11) AUTO_INCREMENT PRIMARY KEY,
+    judul   VARCHAR(200) NOT NULL,
+    isi     TEXT,
+    gambar  VARCHAR(200),
+    status  TINYINT(1) DEFAULT 0,
+    slug    VARCHAR(200)
+);
+```
+
 - Model `ArtikelModel`
 - CRUD Artikel (Create, Read, Update, Delete)
 - Halaman admin sederhana
@@ -117,16 +175,38 @@ lab8_vuejs/
 - Sidebar modular
 
 ### Praktikum 4: Framework Lanjutan (Modul Login)
+
+**Alur Login:**
+```
+Akses /admin → Filter cek session → Belum login → Redirect /user/login
+                                  → Sudah login → Lanjut ke Controller
+```
+
 - Sistem Login dengan `UserModel`
 - Auth Filter
 - Proteksi halaman admin
 - Fitur Logout
 
 ### Praktikum 5 – Pagination dan Pencarian
+
+**Implementasi Kunci:**
+```php
+// Pagination + Search dalam satu method
+$artikel = $model->like('judul', $q)->paginate(10);
+$pager   = $model->pager;
+```
+
+**Fitur:**
 - Pagination: batasi tampilan pakai paginate(10), tampilkan navigasi pakai $pager->links()
 - Pencarian: form GET dengan ->like('judul', $q), dan $pager->only(['q']) agar kata kunci tidak hilang saat ganti halaman
 
 ### Praktikum 6 – Upload File Gambar
+
+**Diagram Relasi:**
+```
+kategori (1) ──────── (Many) artikel
+id_kategori (PK)      id_kategori (FK)
+```
 - Tambahkan enctype="multipart/form-data" di form dan <input type="file">
 - Di controller pakai getFile('gambar')->move(ROOTPATH . 'public/gambar'), nama file disimpan ke database
 
@@ -147,6 +227,22 @@ lab8_vuejs/
 - Filter data tanpa me-refresh halaman
 
 ### Praktikum 10: RESTful API
+
+**Endpoint API:**
+
+| Method | URL | Fungsi |
+|--------|-----|--------|
+| GET | `/post` | Ambil semua artikel |
+| GET | `/post/{id}` | Ambil artikel by ID |
+| POST | `/post` | Tambah artikel baru |
+| PUT | `/post/{id}` | Update artikel |
+| DELETE | `/post/{id}` | Hapus artikel |
+
+Routing cukup dengan satu baris:
+```php
+$routes->resource("post");
+```
+
 - Membuat Resource Controller (Post.php)
 - Full CRUD menggunakan HTTP Method (GET, POST, PUT, DELETE)
 - JSON Response dengan ResponseTrait
@@ -159,6 +255,18 @@ lab8_vuejs/
 - Modal form, reactive data, dan event handling
 
 ### Praktikum 12: VueJS Komponen dan Routing (Single Page Application)
+
+**Struktur Komponen:**
+```
+index.html
+└── #app
+    ├── <nav> (router-link)
+    └── <router-view>
+        ├── Home.js     → path: "/"
+        ├── Artikel.js  → path: "/artikel"
+        └── About.js    → path: "/about"
+```
+
 - Pembuatan Komponen Modular (Home.js, Artikel.js)
 - Implementasi Vue Router menggunakan CDN (vue-router@4)
 - Client-Side Routing dengan createWebHashHistory()
@@ -168,6 +276,14 @@ lab8_vuejs/
 
 
 ### Praktikum 13: VueJS Autentikasi dan Navigation Guards (SPA Security)
+
+**Alur Autentikasi:**
+```
+Login → Terima Token → Simpan di localStorage
+     → Akses /artikel → Navigation Guard cek isLoggedIn
+                       → Belum login → Redirect /login
+```
+
 - Client-Side Security menggunakan router.beforeEach()
 - Membuat Komponen Login (Login.js)
 - Integrasi API Login dari Backend CodeIgniter 4
@@ -177,12 +293,54 @@ lab8_vuejs/
 
 
 ### Praktikum 14: Keamanan API, Autentikasi Token, dan Axios Interceptors
+
+**Alur Autentikasi:**
+```
+Login → Terima Token → Simpan di localStorage
+     → Akses /artikel → Navigation Guard cek isLoggedIn
+                       → Belum login → Redirect /login
+```
+
 - Server-Side Security menggunakan Filter di CodeIgniter 4 (ApiAuthFilter)
 - Token-Based Authentication (Authorization: Bearer <token>)
 - Axios Interceptors (Request & Response) untuk menyuntikkan token secara otomatis
 - Proteksi Endpoint API (POST, PUT, DELETE)
 - Pengujian Keamanan menggunakan Postman (tanpa token → 401 Unauthorized)
 - Integrasi penuh antara Frontend VueJS dan Backend CI4
+
+## 🗄️ Skema Database Lengkap
+
+```sql
+-- Tabel Artikel
+CREATE TABLE artikel (
+    id           INT(11) AUTO_INCREMENT PRIMARY KEY,
+    judul        VARCHAR(200) NOT NULL,
+    isi          TEXT,
+    gambar       VARCHAR(200),
+    status       TINYINT(1) DEFAULT 0,
+    slug         VARCHAR(200),
+    id_kategori  INT(11),
+    CONSTRAINT fk_kategori_artikel FOREIGN KEY (id_kategori) REFERENCES kategori(id_kategori)
+);
+
+-- Tabel Kategori
+CREATE TABLE kategori (
+    id_kategori   INT(11) AUTO_INCREMENT PRIMARY KEY,
+    nama_kategori VARCHAR(100) NOT NULL,
+    slug_kategori VARCHAR(100)
+);
+
+-- Tabel User
+CREATE TABLE user (
+    id           INT(11) AUTO_INCREMENT PRIMARY KEY,
+    username     VARCHAR(200) NOT NULL,
+    useremail    VARCHAR(200),
+    userpassword VARCHAR(200)
+);
+```
+
+---
+
 
 ## Cara Menjalankan
 
@@ -191,10 +349,13 @@ lab8_vuejs/
 cd C:\xampp\htdocs\lab7_php_ci
 C:\xampp\php\php.exe spark serve
 Akses: http://localhost:8080
+```
 
+```
 ### Frontend
 Buka langsung di browser: http://localhost/lab8_vuejs
 
+```
 
 ### Screenshot
 <img width="1366" height="728" alt="Image" src="https://github.com/user-attachments/assets/150c1b3c-b174-4013-9478-9a70c207fe55" />
