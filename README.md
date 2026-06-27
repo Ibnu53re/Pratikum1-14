@@ -15,6 +15,14 @@ Modul ini membangun sistem **Login** menggunakan **CodeIgniter 4** lengkap denga
 
 ---
   
+**Teknologi yang Digunakan:**
+- **Backend**: CodeIgniter 4 (PHP Framework)
+- **Frontend**: Vue.js 3 (CDN) + Vue Router + Axios
+- **Database**: MySQL / phpMyAdmin
+- **Server**: XAMPP
+
+---
+
 ## Struktur Folder Project
 
 ```
@@ -24,19 +32,23 @@ lab7_php_ci/
 │   │   └── ArtikelTerkini.php
 │   ├── Config/
 │   │   ├── Filters.php
+│   │   ├── Paths.php
 │   │   └── Routes.php           
 │   ├── Controllers/
 │   │   ├── Api/                
 │   │   │   ├── Auth.php        
 │   │   │   └── Post.php
+│   │   ├── AjaxController.php
 │   │   ├── Artikel.php
 │   │   ├── Page.php
+│   │   ├── Post.php
 │   │   └── User.php
 │   ├── Filters/
 │   │   ├── Auth.php
 │   │   └── ApiAuthFilter.php
 │   ├── Models/
 │   │   ├── ArtikelModel.php
+│   │   ├── KategoriModel.php
 │   │   └── UserModel.php
 │   ├── Views/
 │   │   ├── artikel/
@@ -59,12 +71,31 @@ lab7_php_ci/
 │   │   └── home.php
 │   └── (folder lain bawaan CI4: Database, Helpers, dll)
 ├── public/
+│   ├── assets/
+│   │   │── js/
+│   │   │   └──jquery-3.6.0.min.js
 │   └── index.php
 ├── writable/
 ├── vendor/                    
 ├── spark
 ├── .env
 └── composer.json
+└──
+```
+
+```
+lab8_vuejs/
+├── index.html                   # Master layout dengan router
+├── assets/
+│   ├── css/
+│   │   └── style.css            # Diperbarui dengan style login & nav
+│   └── js/
+│       ├── app.js               # Utama (Router + Interceptors + Guards)
+│       └── components/
+│           ├── Home.js
+│           ├── Artikel.js
+│           ├── Login.js         
+│           └── About.js         
 └──
 ```
 
@@ -152,6 +183,17 @@ lab7_php_ci/
 - Proteksi Endpoint API (POST, PUT, DELETE)
 - Pengujian Keamanan menggunakan Postman (tanpa token → 401 Unauthorized)
 - Integrasi penuh antara Frontend VueJS dan Backend CI4
+
+## Cara Menjalankan
+
+### Backend
+```bash
+cd C:\xampp\htdocs\lab7_php_ci
+C:\xampp\php\php.exe spark serve
+Akses: http://localhost:8080
+
+### Frontend
+Buka langsung di browser: http://localhost/lab8_vuejs
 
 
 ### Screenshot
